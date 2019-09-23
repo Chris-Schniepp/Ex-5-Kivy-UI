@@ -4,26 +4,35 @@
         size_hint: None, None
 
     DPEAButton:
-        id: test_button
-        text: 'test'
+        id: on
+        text: 'On' if on.state == "normal" else "Off"
         size: 100, 100
-        x: root.width * 0.75
-        y: root.height * 0.5
+        x: root.width * 0.05
+        y: root.height * 0.8
         color: 0, 1, 0, 1
-        on_press: root.pressed()
+
 
     DPEAButton:
-        text: "test2"
+        id: count
+        text: "Counter" if count.state == "normal" else root.pressed2()
         size: 100, 100
-        x: root.width * 0.25
-        y:root.height * 0.5
+        x: root.width * 0.22
+        y:root.height * 0.57
         color: 1, 0, 0, 1
+
+    DPEAButton:
+        id: motor
+        text: "Motor On" if motor.condition == True else "Motor Off"
+        size: 100, 100
+        x: root.width * 0.43
+        y:root.height * 0.35
+        color: 1, 1, 0, 1
         on_press: root.pressed()
 
     ImageButton:
         id: logo_image_button
         source: "../../pidev/kivy/images/DPEALogoTransparent.png"
         size: 100, 100
-        x: root.width * 0.5
-        y: root.height * 0.5
+        x: root.width * 0.8
+        y: root.height * 0.3
         on_press: root.pressed()

@@ -36,16 +36,33 @@ Window.clearcolor = (1, 1, 1, 1)  # White
 
 
 class MainScreen(Screen):
+
     """
     Class to handle the main screen and its associated touch events
     """
+    def __init__(self, **kwargs):
+        super(MainScreen, self).__init__(**kwargs)
+        self.counter = 0
+        self.condition = False
+
+
+
+    def pressed2(self):
+        """
+        Function called on button touch event for button with id: testButton
+        :return: None
+        """
+        self.counter += 1
+        return ("%s" % self.counter)
+
 
     def pressed(self):
         """
         Function called on button touch event for button with id: testButton
         :return: None
         """
-        PauseScreen.pause(pause_scene_name='pauseScene', transition_back_scene='main', text="Test", pause_duration=5)
+        self.condition != (self.condition)
+        #PauseScreen.pause(pause_scene_name='pauseScene', transition_back_scene='main', text="Test", pause_duration=5)
 
     def admin_action(self):
         """
