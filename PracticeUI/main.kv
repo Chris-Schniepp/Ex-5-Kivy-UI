@@ -14,20 +14,41 @@
 
     DPEAButton:
         id: count
-        text: "Counter" if count.state == "normal" else root.pressed2()
+        text: "Counter: " + root.pressed3() if count.state == "normal" else root.pressed2()
         size: 100, 100
         x: root.width * 0.22
         y:root.height * 0.57
         color: 1, 0, 0, 1
 
+
     DPEAButton:
         id: motor
-        text: "Motor On" if motor.condition == True else "Motor Off"
+        text: "Motor On" if motor.state == "normal" and root.pressed() == True else "Motor Off"
         size: 100, 100
         x: root.width * 0.43
         y:root.height * 0.35
         color: 1, 1, 0, 1
-        on_press: root.pressed()
+
+    Slider:
+        size_hint: .75, .75
+        id: slider
+        min: 0
+        max: 100
+        value: 50
+        step: 1
+        x: root.width *.05
+        y: root.height * .6
+        color: 0,1,1,1
+
+    Label:
+        text: "Size of font " + str(int(slider.value))
+        font_size: slider.value
+
+        x: root.width *.2
+        y: root.height *.2
+        color: 1,0,1,1
+
+
 
     ImageButton:
         id: logo_image_button

@@ -36,33 +36,41 @@ Window.clearcolor = (1, 1, 1, 1)  # White
 
 
 class MainScreen(Screen):
-
     """
     Class to handle the main screen and its associated touch events
     """
+    on = False
+    counter = 0
+
     def __init__(self, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
-        self.counter = 0
-        self.condition = False
 
-
-
-    def pressed2(self):
+    def slider(self):
         """
         Function called on button touch event for button with id: testButton
         :return: None
         """
-        self.counter += 1
-        return ("%s" % self.counter)
+        pass
 
+    def pressed2(self):
+
+        self.counter += 1
+        return "%s" % self.counter
+
+    def pressed3(self):
+
+        return str(self.counter)
 
     def pressed(self):
         """
         Function called on button touch event for button with id: testButton
         :return: None
         """
-        self.condition != (self.condition)
-        #PauseScreen.pause(pause_scene_name='pauseScene', transition_back_scene='main', text="Test", pause_duration=5)
+        self.on = not self.on
+        print(self.on)
+        return self.on
+
+        # PauseScreen.pause(pause_scene_name='pauseScene', transition_back_scene='main', text="Test", pause_duration=5)
 
     def admin_action(self):
         """
@@ -86,8 +94,10 @@ class AdminScreen(Screen):
         """
         Builder.load_file('AdminScreen.kv')
 
-        PassCodeScreen.set_admin_events_screen(ADMIN_SCREEN_NAME)  # Specify screen name to transition to after correct password
-        PassCodeScreen.set_transition_back_screen(MAIN_SCREEN_NAME)  # set screen name to transition to if "Back to Game is pressed"
+        PassCodeScreen.set_admin_events_screen(
+            ADMIN_SCREEN_NAME)  # Specify screen name to transition to after correct password
+        PassCodeScreen.set_transition_back_screen(
+            MAIN_SCREEN_NAME)  # set screen name to transition to if "Back to Game is pressed"
 
         super(AdminScreen, self).__init__(**kwargs)
 
@@ -114,6 +124,8 @@ class AdminScreen(Screen):
         :return: None
         """
         quit()
+
+
 """
 Widget additions
 """
