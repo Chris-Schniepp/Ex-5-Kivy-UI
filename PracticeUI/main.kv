@@ -8,7 +8,7 @@
         text: 'On' if on.state == "normal" else "Off"
         size: 100, 100
         x: root.width * 0.05
-        y: root.height * 0.8
+        y: root.height * 0.5
         color: 0, 1, 0, 1
 
 
@@ -17,7 +17,7 @@
         text: "Counter: " + root.pressed3() if count.state == "normal" else root.pressed2()
         size: 100, 100
         x: root.width * 0.22
-        y:root.height * 0.57
+        y:root.height * 0.50
         color: 1, 0, 0, 1
 
 
@@ -35,25 +35,25 @@
         min: 0
         max: 100
         value: 50
+        background_width: 30
         step: 1
         x: root.width *.05
         y: root.height * .6
-        color: 0,1,1,1
+
 
     Label:
-        text: "Size of font " + str(int(slider.value))
+        text: "Size of font: " + str(int(slider.value))
         font_size: slider.value
 
-        x: root.width *.2
-        y: root.height *.2
+        x: root.width *.01
+        y: root.height *.27
         color: 1,0,1,1
 
 
 
     ImageButton:
         id: logo_image_button
-        source: "../../pidev/kivy/images/DPEALogoTransparent.png"
+        source: "/home/chris/Documents/Ex-5-Kivy-UI/DPEALogoTransparent.png" if logo_image_button.state == "normal" and root.pressed() == True else "/home/chris/Documents/Ex-5-Kivy-UI/BlackDiamond.png"
         size: 100, 100
         x: root.width * 0.8
         y: root.height * 0.3
-        on_press: root.pressed()
