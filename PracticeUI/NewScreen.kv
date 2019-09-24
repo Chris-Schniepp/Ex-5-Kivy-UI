@@ -1,0 +1,35 @@
+<NewScreen>:
+    name: 'NewScreen'
+    FloatLayout:
+        size_hint: None, None
+
+    Label:
+        text: "Welcome to the new Screen free of Sliders!"
+        x: root.width *.01
+        y: root.height *.27
+        font_size: 40
+        color: 0,1,1,1
+
+    DPEAButton:
+        id: on
+        text: 'Lets' if on.state == "normal" else "Go!"
+        size: 100, 100
+        x: root.width * 0.5
+        y: root.height * 0.5
+        color: 1, 0, 1, 1
+
+    ImageButton:
+        id: logo_image_button
+        source: "/home/chris/Documents/Ex-5-Kivy-UI/BlackDiamond.png"
+        size: 100, 100
+        x: root.width * 0.8
+        y: root.height * 0.3
+        on_press: root.mainscreen()
+
+    ImageButton:
+        id: animation
+        source: "/home/chris/Documents/Ex-5-Kivy-UI/ironman.png"
+        size: 100, 100
+        x: root.width * .5
+        y: root.height * .1
+        on_press: root.animation()

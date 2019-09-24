@@ -7,8 +7,8 @@
         id: on
         text: 'On' if on.state == "normal" else "Off"
         size: 100, 100
-        x: root.width * 0.05
-        y: root.height * 0.5
+        x: root.width * 0.01
+        y: root.height * 0.3
         color: 0, 1, 0, 1
 
 
@@ -16,8 +16,8 @@
         id: count
         text: "Counter: " + root.pressed3() if count.state == "normal" else root.pressed2()
         size: 100, 100
-        x: root.width * 0.22
-        y:root.height * 0.50
+        x: root.width * 0.25
+        y:root.height * 0.3
         color: 1, 0, 0, 1
 
 
@@ -25,20 +25,20 @@
         id: motor
         text: "Motor On" if motor.state == "normal" and root.pressed() == True else "Motor Off"
         size: 100, 100
-        x: root.width * 0.43
-        y:root.height * 0.35
+        x: root.width * 0.55
+        y:root.height * 0.3
         color: 1, 1, 0, 1
 
     Slider:
-        size_hint: .75, .75
+        size_hint: .5, None
         id: slider
         min: 0
         max: 100
         value: 50
-        background_width: 30
+        background_width: 100
         step: 1
         x: root.width *.05
-        y: root.height * .6
+        y: root.height * .9
 
 
     Label:
@@ -53,7 +53,8 @@
 
     ImageButton:
         id: logo_image_button
-        source: "/home/chris/Documents/Ex-5-Kivy-UI/DPEALogoTransparent.png" if logo_image_button.state == "normal" and root.pressed() == True else "/home/chris/Documents/Ex-5-Kivy-UI/BlackDiamond.png"
+        source: "/home/chris/Documents/Ex-5-Kivy-UI/DPEALogoTransparent.png"
         size: 100, 100
         x: root.width * 0.8
         y: root.height * 0.3
+        on_press: root.transition()

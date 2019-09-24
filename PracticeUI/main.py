@@ -3,6 +3,7 @@ import os
 from kivy.app import App
 from kivy.core.window import Window
 from kivy.lang import Builder
+
 from kivy.uix.screenmanager import ScreenManager, Screen
 
 from pidev.MixPanel import MixPanel
@@ -11,6 +12,7 @@ from pidev.kivy.PauseScreen import PauseScreen
 from pidev.kivy import DPEAButton
 from pidev.kivy import ImageButton
 from kivy.uix.image import Image, AsyncImage
+from kivy.animation import Animation
 
 MIXPANEL_TOKEN = "x"
 MIXPANEL = MixPanel("Project Name", MIXPANEL_TOKEN)
@@ -18,6 +20,7 @@ MIXPANEL = MixPanel("Project Name", MIXPANEL_TOKEN)
 SCREEN_MANAGER = ScreenManager()
 MAIN_SCREEN_NAME = 'main'
 ADMIN_SCREEN_NAME = 'admin'
+NEW_SCREEN_NAME = 'NewScreen'
 
 
 class ProjectNameGUI(App):
@@ -46,20 +49,14 @@ class MainScreen(Screen):
     def __init__(self, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
 
-    def slider(self):
-        """
-        Function called on button touch event for button with id: testButton
-        :return: None
-        """
-        pass
+    def transition(self):
+        SCREEN_MANAGER.current = NEW_SCREEN_NAME
 
     def pressed2(self):
-
         self.counter += 1
         return "%s" % self.counter
 
     def pressed3(self):
-
         return str(self.counter)
 
     def pressed(self):
@@ -80,6 +77,23 @@ class MainScreen(Screen):
         :return: None
         """
         SCREEN_MANAGER.current = 'passCode'
+
+
+class NewScreen(Screen):
+
+    def __init__(self, **kwargs):
+        Builder.load_file('NewScreen.kv')
+
+        super(NewScreen, self).__init__(**kwargs)
+
+    def mainscreen(self):
+        SCREEN_MANAGER.current = MAIN_SCREEN_NAME
+
+    def animation(self):
+        self.anim = Animation(x=50, duration=2.) & Animation(size=(200, 200), duration=2.)
+        self.anim += Animation(x=750, y=400, duration=.5) & Animation(size=(50, 50), duration=.5)
+        self.anim += Animation(x=200, y=750, duration=.25) & Animation(size=(500, 500), duration=.25)
+        self.anim.start(self.ids.animation)
 
 
 class AdminScreen(Screen):
@@ -136,6 +150,7 @@ SCREEN_MANAGER.add_widget(MainScreen(name=MAIN_SCREEN_NAME))
 SCREEN_MANAGER.add_widget(PassCodeScreen(name='passCode'))
 SCREEN_MANAGER.add_widget(PauseScreen(name='pauseScene'))
 SCREEN_MANAGER.add_widget(AdminScreen(name=ADMIN_SCREEN_NAME))
+SCREEN_MANAGER.add_widget(NewScreen(name=NEW_SCREEN_NAME))
 
 """
 MixPanel
