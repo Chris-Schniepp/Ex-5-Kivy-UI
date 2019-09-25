@@ -15,7 +15,6 @@ from pidev.Joystick import Joystick
 from kivy.uix.image import Image, AsyncImage
 from kivy.animation import Animation
 
-
 MIXPANEL_TOKEN = "x"
 MIXPANEL = MixPanel("Project Name", MIXPANEL_TOKEN)
 
@@ -82,21 +81,18 @@ class MainScreen(Screen):
 
 
 class NewScreen(Screen):
-
     joystick = Joystick(0, False)
 
     def __init__(self, **kwargs):
         Builder.load_file('NewScreen.kv')
-
         super(NewScreen, self).__init__(**kwargs)
 
     def joystick1(self):
         for x in range(11):
             print(x)
             if self.joystick.get_button_state(x) == 1:
-                return str(x)
-
-        return "None"
+                self.ids.updates.text = str(x)
+                break
 
     def mainscreen(self):
         SCREEN_MANAGER.current = MAIN_SCREEN_NAME

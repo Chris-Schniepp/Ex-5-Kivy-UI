@@ -11,7 +11,8 @@
         color: 0,1,1,1
 
     Label:
-        text: "The Button depressed is " + root.joystick1()
+        id: updates
+        text: "The Button Depressed is:"
         x: root.width *.01
         y: root.height *.17
         font_size: 40
@@ -24,6 +25,7 @@
         x: root.width * 0.1
         y: root.height * 0.3
         color: 1, 0, 1, 1
+        on_press: root.joystick1()
 
     ImageButton:
         id: logo_image_button
