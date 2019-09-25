@@ -11,8 +11,10 @@ from pidev.kivy.PassCodeScreen import PassCodeScreen
 from pidev.kivy.PauseScreen import PauseScreen
 from pidev.kivy import DPEAButton
 from pidev.kivy import ImageButton
+from pidev.Joystick import Joystick
 from kivy.uix.image import Image, AsyncImage
 from kivy.animation import Animation
+
 
 MIXPANEL_TOKEN = "x"
 MIXPANEL = MixPanel("Project Name", MIXPANEL_TOKEN)
@@ -65,7 +67,7 @@ class MainScreen(Screen):
         :return: None
         """
         self.on = not self.on
-        print(self.on)
+
         return self.on
 
         # PauseScreen.pause(pause_scene_name='pauseScene', transition_back_scene='main', text="Test", pause_duration=5)
@@ -81,18 +83,35 @@ class MainScreen(Screen):
 
 class NewScreen(Screen):
 
+    joystick = Joystick(0, False)
+
     def __init__(self, **kwargs):
         Builder.load_file('NewScreen.kv')
 
         super(NewScreen, self).__init__(**kwargs)
 
+    def joystick1(self):
+        for x in range(11):
+            print(x)
+            if self.joystick.get_button_state(x) == 1:
+                return str(x)
+
+        return "None"
+
     def mainscreen(self):
         SCREEN_MANAGER.current = MAIN_SCREEN_NAME
 
     def animation(self):
-        self.anim = Animation(x=50, duration=2.) & Animation(size=(200, 200), duration=2.)
-        self.anim += Animation(x=750, y=400, duration=.5) & Animation(size=(50, 50), duration=.5)
-        self.anim += Animation(x=200, y=750, duration=.25) & Animation(size=(500, 500), duration=.25)
+
+        self.anim = Animation(x=50, y=100, duration=2.) & Animation(size=(200, 200), duration=2.)
+
+        for w in range(3):
+            self.anim += Animation(x=750, y=300, duration=.05) & Animation(size=(50, 50), duration=.05)
+            self.anim += Animation(x=200, y=600, duration=.05) & Animation(size=(500, 500), duration=.05)
+            self.anim += Animation(x=5, y=300, duration=.05) & Animation(size=(200, 200), duration=.05)
+            self.anim += Animation(x=600, y=10, duration=.05) & Animation(size=(10, 10), duration=.05)
+
+        self.anim += Animation(x=400, y=75, duration=2.) & Animation(size=(120, 120), duration=2.)
         self.anim.start(self.ids.animation)
 
 

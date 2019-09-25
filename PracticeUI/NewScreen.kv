@@ -10,12 +10,19 @@
         font_size: 40
         color: 0,1,1,1
 
+    Label:
+        text: "The Button depressed is " + root.joystick1()
+        x: root.width *.01
+        y: root.height *.17
+        font_size: 40
+        color: 0,1,1,1
+
     DPEAButton:
         id: on
         text: 'Lets' if on.state == "normal" else "Go!"
         size: 100, 100
-        x: root.width * 0.5
-        y: root.height * 0.5
+        x: root.width * 0.1
+        y: root.height * 0.3
         color: 1, 0, 1, 1
 
     ImageButton:
