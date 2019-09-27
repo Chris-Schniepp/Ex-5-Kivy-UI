@@ -105,7 +105,7 @@ class NewScreen(Screen):
                     self.ids.updates.text = str(x)
                     break
 
-
+            time.sleep(.1)
 
     def mainscreen(self):
         SCREEN_MANAGER.current = MAIN_SCREEN_NAME
