@@ -14,6 +14,8 @@ from pidev.kivy import ImageButton
 from pidev.Joystick import Joystick
 from kivy.uix.image import Image, AsyncImage
 from kivy.animation import Animation
+import threading
+import time
 
 MIXPANEL_TOKEN = "x"
 MIXPANEL = MixPanel("Project Name", MIXPANEL_TOKEN)
@@ -87,12 +89,18 @@ class NewScreen(Screen):
         Builder.load_file('NewScreen.kv')
         super(NewScreen, self).__init__(**kwargs)
 
+    def thread_function(self):
+        y = threading.Thread(target=self.joystick1)
+        y.start()
+
     def joystick1(self):
-        for x in range(11):
-            print(x)
-            if self.joystick.get_button_state(x) == 1:
-                self.ids.updates.text = str(x)
-                break
+        while 1:
+            for x in range(11):
+                if self.joystick.get_button_state(x) == 1:
+                    self.ids.updates.text = str(x)
+                    break
+
+
 
     def mainscreen(self):
         SCREEN_MANAGER.current = MAIN_SCREEN_NAME

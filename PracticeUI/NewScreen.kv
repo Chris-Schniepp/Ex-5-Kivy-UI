@@ -1,5 +1,8 @@
 <NewScreen>:
     name: 'NewScreen'
+
+    on_enter: root.thread_function()
+
     FloatLayout:
         size_hint: None, None
 
@@ -11,12 +14,20 @@
         color: 0,1,1,1
 
     Label:
+        id: location
+        text: str(root.joystick.get_both_axes())
+        x: root.joystick.get_axis('x') * 200
+        y: root.joystick.get_axis('y') * 200
+        font_size: 40
+        color: 0,1,1,1
+
+    Label:
         id: updates
         text: "The Button Depressed is:"
         x: root.width *.01
-        y: root.height *.17
+        y: root.height *.01
         font_size: 40
-        color: 0,1,1,1
+        color: 1,0,0,1
 
     DPEAButton:
         id: on
