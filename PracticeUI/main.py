@@ -90,11 +90,16 @@ class NewScreen(Screen):
         super(NewScreen, self).__init__(**kwargs)
 
     def thread_function(self):
-        y = threading.Thread(target=self.joystick1)
+        y = threading.Thread(target=self.joystick1, daemon=True)
         y.start()
 
     def joystick1(self):
-        while 1:
+        while True:
+
+            self.ids.location.x = self.joystick.get_axis('x') * 200
+            self.ids.location.y = self.joystick.get_axis('y') * -200
+            self.ids.location.text = "{:.3f} {:.3f}".format(self.joystick.get_axis('x'), self.joystick.get_axis('y'))
+
             for x in range(11):
                 if self.joystick.get_button_state(x) == 1:
                     self.ids.updates.text = str(x)
