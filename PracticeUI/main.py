@@ -14,6 +14,7 @@ from pidev.kivy import ImageButton
 from pidev.Joystick import Joystick
 from kivy.uix.image import Image, AsyncImage
 from kivy.animation import Animation
+from kivy.core.window import Window
 import threading
 import time
 
@@ -50,6 +51,7 @@ class MainScreen(Screen):
     counter = 0
 
     def __init__(self, **kwargs):
+        Window.clearcolor = (0, 0, 0, 1)
         super(MainScreen, self).__init__(**kwargs)
 
     def transition(self):
@@ -83,7 +85,7 @@ class MainScreen(Screen):
 
 
 class NewScreen(Screen):
-    joystick = Joystick(0, False)
+    joystick = Joystick(0, True)
 
     def __init__(self, **kwargs):
         Builder.load_file('NewScreen.kv')
