@@ -98,14 +98,19 @@ class NewScreen(Screen):
     def joystick1(self):
         while True:
 
-            self.ids.location.x = self.joystick.get_axis('x') * 200
-            self.ids.location.y = self.joystick.get_axis('y') * -200
+            self.ids.location.x = self.joystick.get_axis('x') * (self.width/2)
+            self.ids.location.y = self.joystick.get_axis('y') * -(self.height/2)
             self.ids.location.text = "{:.3f} {:.3f}".format(self.joystick.get_axis('x'), self.joystick.get_axis('y'))
 
             for x in range(11):
                 if self.joystick.get_button_state(x) == 1:
                     self.ids.updates.text = str(x)
                     break
+
+            if (-.90 * (self.width/2)) <= self.ids.location.x <= (.90 * (self.width/2) and (-.90 * (self.height/2))) <= self.ids.location.y <= (.90 * (self.height/2)):
+                self.ids.on.text = "Pressed!"
+            else:
+                self.ids.on.text = "Not Pressed"
 
             time.sleep(.1)
 
