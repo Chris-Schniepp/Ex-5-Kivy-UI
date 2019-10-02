@@ -100,7 +100,7 @@ class NewScreen(Screen):
 
             self.ids.location.x = self.joystick.get_axis('x') * (self.width/2)
             self.ids.location.y = self.joystick.get_axis('y') * -(self.height/2)
-            self.ids.location.text = "{:.3f} {:.3f}".format(self.joystick.get_axis('x'), self.joystick.get_axis('y'))
+            self.ids.location.text = "{:.3f} {:1.3f}".format(self.joystick.get_axis('x'), (self.joystick.get_axis('y')))
 
             for x in range(11):
                 if self.joystick.get_button_state(x) == 1:
@@ -109,8 +109,9 @@ class NewScreen(Screen):
                 else:
                     self.ids.updates.text = "No button depressed"
 
-            if (-.9 * (self.width/2)) <= self.ids.location.x <= (-.6 * (self.width/2)) and \
-               (.01 * (self.height/2)) <= self.ids.location.y <= (.4 * (self.height/2)):
+            if (-.9 * (self.width/2)) <= self.ids.location.x <= (-.5 * (self.width/2)) and \
+               (-.4 * (self.height/2)) <= self.ids.location.y <= (-.0001 * (self.height/2)) and \
+               self.joystick.get_button_state(0) == 1:
                 self.ids.on.text = "Pressed!"
             else:
                 self.ids.on.text = "Not Pressed"
