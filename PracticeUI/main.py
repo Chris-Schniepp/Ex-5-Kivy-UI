@@ -85,6 +85,7 @@ class MainScreen(Screen):
 
 
 class NewScreen(Screen):
+    if_then = False
     joystick = Joystick(0, True)
 
     def __init__(self, **kwargs):
@@ -98,8 +99,8 @@ class NewScreen(Screen):
     def joystick1(self):
         while True:
 
-            self.ids.location.x = self.joystick.get_axis('x') * (self.width/2)
-            self.ids.location.y = self.joystick.get_axis('y') * -(self.height/2)
+            self.ids.location.x = self.joystick.get_axis('x') * (self.width / 2)
+            self.ids.location.y = self.joystick.get_axis('y') * -(self.height / 2)
             self.ids.location.text = "{:.3f} {:1.3f}".format(self.joystick.get_axis('x'), (self.joystick.get_axis('y')))
 
             for x in range(11):
@@ -109,12 +110,27 @@ class NewScreen(Screen):
                 else:
                     self.ids.updates.text = "No button depressed"
 
-            if (-.9 * (self.width/2)) <= self.ids.location.x <= (-.5 * (self.width/2)) and \
-               (-.4 * (self.height/2)) <= self.ids.location.y <= (-.0001 * (self.height/2)) and \
-               self.joystick.get_button_state(0) == 1:
-                self.ids.on.text = "Pressed!"
+            if (-.9 * (self.width / 2)) <= self.ids.location.x <= (-.5 * (self.width / 2)) and \
+               (-.4 * (self.height / 2)) <= self.ids.location.y <= (-.0001 * (self.height / 2)):
+                pass
             else:
                 self.ids.on.text = "Not Pressed"
+
+
+            if (-.9 * (self.width / 2)) <= self.ids.location.x <= (-.5 * (self.width / 2)) and \
+                    (-.4 * (self.height / 2)) <= self.ids.location.y <= (-.0001 * (self.height / 2)) and \
+                    self.joystick.get_button_state(0) == 0 and self.if_then == False:
+                self.if_then = True
+                self.ids.on.text = "Not Pressed"
+
+
+
+            if (-.9 * (self.width / 2)) <= self.ids.location.x <= (-.5 * (self.width / 2)) and \
+                    (-.4 * (self.height / 2)) <= self.ids.location.y <= (-.0001 * (self.height / 2)) and \
+                    self.if_then and self.joystick.get_button_state(0) == 1:
+                self.ids.on.text = "Pressed!"
+                self.if_then = False
+
 
             time.sleep(.1)
 
