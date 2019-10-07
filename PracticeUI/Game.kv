@@ -7,12 +7,19 @@
 
     ImageButton:
         source: "/home/chris/Documents/Ex-5-Kivy-UI/BlackDiamond.png"
-        size: 100, 100
-        x: root.width * 0.8
-        y: root.height * 0.3
+        size: 120, 120
+        x: root.width * 0.45
+        y: root.height * 0.45
         on_press: root.to_main_screen()
 
     Label:
         id: arrow
         font_size: 40
         color: 0,1,1,1
+
+    ImageButton:
+        id: hero
+        source: "/home/chris/Documents/Ex-5-Kivy-UI/ironman.png"
+        size: 120, 120
+        x: root.width * .45
+        y: root.height * .45

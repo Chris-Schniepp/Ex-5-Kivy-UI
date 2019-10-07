@@ -92,9 +92,32 @@ class Game(Screen):
     def __init__(self, **kwargs):
         Builder.load_file('Game.kv')
         super(Game, self).__init__(**kwargs)
+        self._keyboard = Window.request_keyboard(None, self)
+        if not self._keyboard:
+            return
+        self._keyboard.bind(on_key_down=self.on_keyboard_down)
 
     def to_main_screen(self):
         SCREEN_MANAGER.current = MAIN_SCREEN_NAME
+
+    def thread_function2(self):
+        y = threading.Thread(target=self.move_iron_man(), daemon=True)
+        y.start()
+
+    def on_keyboard_down(self, keyboard, keycode, text, modifiers):
+        if keycode[1] == 'left':
+            self.ids.hero.x -= 50
+        elif keycode[1] == 'right':
+            self.ids.hero.x += 50
+        elif keycode[1] == 'up':
+            self.ids.hero.y += 50
+        elif keycode[1] == 'down':
+            self.ids.hero.y -= 50
+        else:
+            return False
+        return True
+
+
 
 
 class NewScreen(Screen):
