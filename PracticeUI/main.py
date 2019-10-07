@@ -25,6 +25,7 @@ SCREEN_MANAGER = ScreenManager()
 MAIN_SCREEN_NAME = 'main'
 ADMIN_SCREEN_NAME = 'admin'
 NEW_SCREEN_NAME = 'NewScreen'
+GAME_SCREEN_NAME = 'game'
 
 
 class ProjectNameGUI(App):
@@ -57,6 +58,9 @@ class MainScreen(Screen):
     def transition(self):
         SCREEN_MANAGER.current = NEW_SCREEN_NAME
 
+    def to_game_screen(self):
+        SCREEN_MANAGER.current = GAME_SCREEN_NAME
+
     def pressed2(self):
         self.counter += 1
         return "%s" % self.counter
@@ -82,6 +86,15 @@ class MainScreen(Screen):
         :return: None
         """
         SCREEN_MANAGER.current = 'passCode'
+
+class Game(Screen):
+
+    def __init__(self, **kwargs):
+        Builder.load_file('Game.kv')
+        super(Game, self).__init__(**kwargs)
+
+    def to_main_screen(self):
+        SCREEN_MANAGER.current = MAIN_SCREEN_NAME
 
 
 class NewScreen(Screen):
@@ -206,6 +219,7 @@ SCREEN_MANAGER.add_widget(PassCodeScreen(name='passCode'))
 SCREEN_MANAGER.add_widget(PauseScreen(name='pauseScene'))
 SCREEN_MANAGER.add_widget(AdminScreen(name=ADMIN_SCREEN_NAME))
 SCREEN_MANAGER.add_widget(NewScreen(name=NEW_SCREEN_NAME))
+SCREEN_MANAGER.add_widget(Game(name=GAME_SCREEN_NAME))
 
 """
 MixPanel

@@ -1,0 +1,18 @@
+<Game>:
+    name: 'game'
+
+
+    FloatLayout:
+        size_hint: None, None
+
+    ImageButton:
+        source: "/home/chris/Documents/Ex-5-Kivy-UI/BlackDiamond.png"
+        size: 100, 100
+        x: root.width * 0.8
+        y: root.height * 0.3
+        on_press: root.to_main_screen()
+
+    Label:
+        id: arrow
+        font_size: 40
+        color: 0,1,1,1
